@@ -1,3 +1,6 @@
+### v1.1.1
+* Updated to use ReturnsAPI.
+
 ### v1.1.0
 * Now multiplayer synced.
 
