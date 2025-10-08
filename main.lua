@@ -27,13 +27,7 @@ local function init()
 
         function(buffer, player)
             local actor = buffer:read_instance()
-
             GM.actor_activity_set(actor, 0)
-
-            -- [Host]  Send to all players
-            if Net.host then
-                packet_free_actor:send_exclude(player, actor)
-            end
         end
     )
 
@@ -122,9 +116,7 @@ Hook.add_pre(gm.constants.net_send_instance_message, function(self, other, resul
     -- Check if current selection is Cancel
     if contents:get(self.selection) == item.object_id then
         -- Send signal to free actor activity
-        if      Net.host    then packet_free_actor:send_to_all(args[2].value)
-        elseif  Net.client  then packet_free_actor:send_to_host(args[2].value)
-        end
+        packet_free_actor:send_to_all(args[2].value)
         
         return false
     end
