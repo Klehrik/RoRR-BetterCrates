@@ -19,8 +19,8 @@ local function init()
     item:set_sprite(Sprite.new("cancel", "~/sCancel.png", 1, 16, 16))
 
     -- Packet
-    packet_free_actor = Packet.new()
-    packet_free_actor:set_serializers(
+    packet_freeActor = Packet.new("freeActor")
+    packet_freeActor:set_serializers(
         function(buffer, actor)
             buffer:write_instance(actor)
         end,
@@ -116,7 +116,7 @@ Hook.add_pre(gm.constants.net_send_instance_message, function(self, other, resul
     -- Check if current selection is Cancel
     if contents:get(self.selection) == item.object_id then
         -- Send signal to free actor activity
-        packet_free_actor:send_to_all(args[2].value)
+        packet_freeActor:send_to_all(args[2].value)
         
         return false
     end
