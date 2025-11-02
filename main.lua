@@ -1,7 +1,6 @@
 -- Better Crates
 -- Klehrik
 
-mods["LuaENVY-ENVY"].auto()
 mods["ReturnsAPI-ReturnsAPI"].auto{
     namespace   = "betterCrates",
     mp          = true
@@ -11,12 +10,12 @@ local item
 local packet
 local saved_selections = {}
 
-local function init()
+Initialize.add_hotloadable(Callback.Priority.AFTER, function()
     hotloaded = true
     
     -- Add Cancel item
     item = Item.new("cancel")
-    item:set_sprite(Sprite.new("cancel", "~/sCancel.png", 1, 16, 16))
+    item:set_sprite(Sprite.new("cancel", "~/sCancel.png", 1, 17, 16))
 
     -- Packet
     packet_freeActor = Packet.new("freeActor")
@@ -37,6 +36,8 @@ local function init()
         if obj.base == gm.constants.oCustomObject_pInteractableCrate then
             
             Callback.add(obj.on_step, Callback.Priority.BEFORE, function(inst)
+                if not Instance.exists(inst) then return end
+
                 local inst_data = Instance.get_data(inst)
                 local actor = inst.activator
                 local object_index = inst:get_object_index()
@@ -96,11 +97,7 @@ local function init()
 
         end
     end
-end
-
-Initialize.add(Callback.Priority.AFTER, init)
-if hotloaded then init() end
-
+end)
 
 Hook.add_pre(gm.constants.net_send_instance_message, function(self, other, result, args)
     -- Intercept net message that is sent on choosing an item
