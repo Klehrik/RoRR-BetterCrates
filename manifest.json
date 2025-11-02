@@ -4,7 +4,7 @@
 	"website_url": "https://github.com/Klehrik/RoRR-BetterCrates",
 	"description": "Allows exiting command crates and saves last selection.",
 	"dependencies": [
-		"ReturnOfModding-ReturnOfModding-1.1.9",
-		"ReturnsAPI-ReturnsAPI-0.1.28"
+		"ReturnOfModding-ReturnOfModding-1.1.11",
+		"ReturnsAPI-ReturnsAPI-0.1.30"
 	]
 }
